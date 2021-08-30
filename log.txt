@@ -1,0 +1,14 @@
+Author : Pratish Pande
+Prn : 210540154035
+Project : Agriculture using iot
+Project Guide : Aman Kanwar
+Batch : May-2021 
+
+
+Date:29/8/2021
+Time:10:00 pm
+
+-->1)Installation of keiluvision and stm32 libraries
+-->2)Creating Repositories in Git-hub for project
+
+
