@@ -19,9 +19,9 @@ Time:11:00 pm
 
     ----->systick timer was not enabled
 
-    ----->sytick timer priority was weak ,so we need to explicitly declare to             enable the delay.
+    ----->sytick timer priority was weak ,so we need to explicitly declare to enable the delay.
 
-    ----->declare variable as volatile or do o0 in c compiler setting if not              done value of variable will not get updated
+    ----->declare variable as volatile or do o0 in c compiler setting if not done value of variable will not get updated
 
     ----->In initialization we have to also write HAL_INIT().
 
