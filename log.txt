@@ -28,3 +28,17 @@ Time:11:00 pm
 -->2)After all this correction able to write first code for blinking led in keil
 
  
+Date:31/8/2021
+Time:11:00 pm
+
+
+-->1)Read documents about linux boot loading and boot sequence for an ARM
+
+------------->https://www.embeddedrelated.com/showarticle/124.php
+
+------------->https://embeddedbuddies555.wordpress.com/2020/03/29/linux-booting-process-on-arm-processor/
+
+-->2)Connected ESP32 to wifi with using mqtt protocol
+
+-->3)Started with adc single shot conversion program in keil
+
