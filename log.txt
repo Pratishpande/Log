@@ -42,3 +42,21 @@ Time:11:00 pm
 
 -->3)Started with adc single shot conversion program in keil
 
+
+
+Date:1/8/2021
+Time:11:00 pm
+
+
+-->1)Connected ESP32 to thingsboard.io free source cloud
+
+-->2)Completed with adc single shot conversion program in keil
+
+     --->Watched adc value in debug session by clicking on enable (blue button) continously and clicking on reset(black button)
+
+-->Problem faced
+      
+     --->Do not stop adc after starting it for enable button.
+
+
+
