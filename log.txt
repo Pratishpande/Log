@@ -44,7 +44,7 @@ Time:11:00 pm
 
 
 
-Date:1/8/2021
+Date:1/9/2021
 Time:11:00 pm
 
 
@@ -60,8 +60,110 @@ Time:11:00 pm
 
 
 
-Date:2/8/2021
+Date:2/9/2021
 Time:11:00 pm
 
--->1)Moistur sensor working on arduino nano
+-->1)Moisture sensor working on arduino nano
+
+
+Date:6/9/2021
+Time:11:00 pm
+
+-->1)Interfacing of sensor wih STM32F407VG using CUBEMX BY using ADC Timer trigger code
+
+-->2)Started same code with keil.
+
+-->3)Started with Interfacing of stm32 with esp32.
    
+
+Date:10/9/2021
+Time:11:00 pm
+
+--->1)Done with building of  cross-compiler toolchain for beaglebone 
+
+Date:25/9/2021
+Time:11:00 pm
+
+--->1)Done with interfacing moisture sensor and succesfully reading data with adc timer trigger.
+
+      ---->Problems faced
+        ----->1)we have to explicitly write Hal_MspInit() function for system clock configuration otherwise it 
+                will not work.
+        ----->2)Found out problem form adc driver file and cross-referenced with cube mx stm32f4xx_msp.c file.
+
+
+--->2)started with Uart transmission.
+
+
+Date:26/9/2021
+Time:11:00 pm
+
+--->1)Done with Uart_transmission of Data to ESP32
+
+----->Problems faced
+    ---->1)We cannot directly send int data using uart transmission hal api because we can only send 1 byte of character data
+      
+       ---> Declare a character buffer.
+       ---> Data needs to be converted from int to character so we use sprintf function which stores int value as formated series of characters and values in char buffer.
+      
+ ---> Do not send directly int value , first take char variable and give it numerical value eg.65, it will print ascii value of 'A'.
+ ---> Do not use 10 or value whose asci value is /n,/t or /r.
+  ---> Then take char buffer and give a string eg.Hello World and try print it on Putty.
+    --->This all methods are done to check whether connections are write and uart transmission is working.
+
+Date:27/9/2021
+Time:11:00 pm
+
+--->1)Started with serial reading of data from Esp32 send by STM32F4xx
+
+--->2)Need to check proper connections before sending and must be common grounded
+
+--->3)On arduino website api for Uart for transmission and Reception is given or below Youtube videos reference is good
+                    https://www.youtube.com/watch?v=7CQNLu5OfT8
+
+--->4)we also can refer to github code of below link
+                   https://github.com/G6EJD/ESP32_Serial_Port_Examples
+         
+--->5)First try to send and receive on Esp32 in loopback mode sending from 1 Uart to another Uartreceiver if it works successfully then move on to next step
+
+--->6)Succesfully send data from STM32F4xx and Receive data on Esp32 and displayed on Serial monitor
+
+Note : Check The Baud Rate and Transmisson pins.
+
+
+Date:28/9/2021
+Time:11:00 pm
+
+--->1)Started with transmission of data on mqtt broker by using mqtt protocol.
+
+--->Library to be installed
+  --->1)PubSubClient and WiFi 
+
+--->2)Successfully completed data transmission with mqtt protocol using node-red
+
+
+Date:29/9/2021
+
+--->1)Started the project with  FreeRTOS in cube mx .
+
+---->2)Babu Sir notes on RTOS.
+
+----->3)Documents to be read are given below
+
+------>1)Mastering_The_FreeRTOS_Real_Time_Kernel_A_Hands_on_Tutorial_Guide
+
+------>2)FreeRTOS_Reference_Manual_v9.0.0 and above recomended
+
+----->4)Started first with adc_timer trigger and successfully completed by creating a task and scheduling it.
+
+---->
+
+
+
+
+ 
+
+
+
+
+
