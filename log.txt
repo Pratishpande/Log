@@ -143,6 +143,7 @@ Time:11:00 pm
 
 
 Date:29/9/2021
+Time:11:00 pm
 
 --->1)Started the project with  FreeRTOS in cube mx .
 
@@ -156,8 +157,15 @@ Date:29/9/2021
 
 ----->4)Started first with adc_timer trigger and successfully completed by creating a task and scheduling it.
 
----->
 
+Date:30/9/2021 
+Time:11:00 pm
+
+
+--->1)Completed with adc_timer trigger and uart by creating producer-consumer task.
+
+--->2)Effictively able to control periodicity of transimission of sensor data
+ 
 
 
 
