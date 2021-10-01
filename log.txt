@@ -161,12 +161,29 @@ Time:11:00 pm
 Date:30/9/2021 
 Time:11:00 pm
 
+--->1)Started with rtos in keil.
 
---->1)Completed with adc_timer trigger and uart by creating producer-consumer task.
+  --->Problems faced
 
---->2)Effictively able to control periodicity of transimission of sensor data
+    --->1)we need to install package for FreeRTOS v10.
+     
+
+--->2)Completed with adc_timer trigger and uart by creating producer-consumer task.
+
+  ---->1)Do not write systick interrupt handler function as we do in bare metal because it is written in port.c file of FreeRTOS.
+
+--->3)Effictively able to control periodicity of transimission of sensor data and understand the usage of queue.
  
+--->4)Problem faced while reception on ESP32
 
+   ---->1)We have take a buffer and store the character value one by one ,after completing all the transmission fron STM32F4xx buffer and storing the value in ESP32
+          then only publish the data otherwise it will print garbage value and irregulaties in displaying the sensor reading on screen.
+     
+   ---->2)store all the value in buffer in while(serial.available()) and when there is no transmission then publish it.
+
+   ---->3)As the producer task is periodic task with period of 10 sec and we publish message at the period of 1 sec  it will print empty value. 
+
+   ---->4)Take the delay value 10 or more then 10 so that it will publish after reception of data on ESP32
 
 
  
