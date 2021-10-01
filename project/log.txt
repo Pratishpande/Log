@@ -1,0 +1,194 @@
+Author : Pratish Pande
+Prn : 210540154035
+Project : Agriculture using iot
+Project Guide : Aman Kanwar
+Batch : May-2021 
+
+
+Date:29/8/2021
+Time:10:00 pm
+
+-->1)Installation of keiluvision and stm32 libraries
+-->2)Creating Repositories in Git-hub for project
+
+
+Date:30/8/2021
+Time:11:00 pm
+
+-->1)Tried  running first program in keiluvision , unable to run due to following errors.
+
+    ----->systick timer was not enabled
+
+    ----->sytick timer priority was weak ,so we need to explicitly declare to enable the delay.
+
+    ----->declare variable as volatile or do o0 in c compiler setting if not done value of variable will not get updated
+
+    ----->In initialization we have to also write HAL_INIT().
+
+-->2)After all this correction able to write first code for blinking led in keil
+
+ 
+Date:31/8/2021
+Time:11:00 pm
+
+
+-->1)Read documents about linux boot loading and boot sequence for an ARM
+
+------------->https://www.embeddedrelated.com/showarticle/124.php
+
+------------->https://embeddedbuddies555.wordpress.com/2020/03/29/linux-booting-process-on-arm-processor/
+
+-->2)Connected ESP32 to wifi with using mqtt protocol
+
+-->3)Started with adc single shot conversion program in keil
+
+
+
+Date:1/9/2021
+Time:11:00 pm
+
+
+-->1)Connected ESP32 to thingsboard.io free source cloud
+
+-->2)Completed with adc single shot conversion program in keil
+
+     --->Watched adc value in debug session by clicking on enable (blue button) continously and clicking on reset(black button)
+
+-->Problem faced
+      
+     --->Do not stop adc after starting it for enable button.
+
+
+
+Date:2/9/2021
+Time:11:00 pm
+
+-->1)Moisture sensor working on arduino nano
+
+
+Date:6/9/2021
+Time:11:00 pm
+
+-->1)Interfacing of sensor wih STM32F407VG using CUBEMX BY using ADC Timer trigger code
+
+-->2)Started same code with keil.
+
+-->3)Started with Interfacing of stm32 with esp32.
+   
+
+Date:10/9/2021
+Time:11:00 pm
+
+--->1)Done with building of  cross-compiler toolchain for beaglebone 
+
+Date:25/9/2021
+Time:11:00 pm
+
+--->1)Done with interfacing moisture sensor and succesfully reading data with adc timer trigger.
+
+      ---->Problems faced
+        ----->1)we have to explicitly write Hal_MspInit() function for system clock configuration otherwise it 
+                will not work.
+        ----->2)Found out problem form adc driver file and cross-referenced with cube mx stm32f4xx_msp.c file.
+
+
+--->2)started with Uart transmission.
+
+
+Date:26/9/2021
+Time:11:00 pm
+
+--->1)Done with Uart_transmission of Data to ESP32
+
+----->Problems faced
+    ---->1)We cannot directly send int data using uart transmission hal api because we can only send 1 byte of character data
+      
+       ---> Declare a character buffer.
+       ---> Data needs to be converted from int to character so we use sprintf function which stores int value as formated series of characters and values in char buffer.
+      
+ ---> Do not send directly int value , first take char variable and give it numerical value eg.65, it will print ascii value of 'A'.
+ ---> Do not use 10 or value whose asci value is /n,/t or /r.
+  ---> Then take char buffer and give a string eg.Hello World and try print it on Putty.
+    --->This all methods are done to check whether connections are write and uart transmission is working.
+
+Date:27/9/2021
+Time:11:00 pm
+
+--->1)Started with serial reading of data from Esp32 send by STM32F4xx
+
+--->2)Need to check proper connections before sending and must be common grounded
+
+--->3)On arduino website api for Uart for transmission and Reception is given or below Youtube videos reference is good
+                    https://www.youtube.com/watch?v=7CQNLu5OfT8
+
+--->4)we also can refer to github code of below link
+                   https://github.com/G6EJD/ESP32_Serial_Port_Examples
+         
+--->5)First try to send and receive on Esp32 in loopback mode sending from 1 Uart to another Uartreceiver if it works successfully then move on to next step
+
+--->6)Succesfully send data from STM32F4xx and Receive data on Esp32 and displayed on Serial monitor
+
+Note : Check The Baud Rate and Transmisson pins.
+
+
+Date:28/9/2021
+Time:11:00 pm
+
+--->1)Started with transmission of data on mqtt broker by using mqtt protocol.
+
+--->Library to be installed
+  --->1)PubSubClient and WiFi 
+
+--->2)Successfully completed data transmission with mqtt protocol using node-red
+
+
+Date:29/9/2021
+Time:11:00 pm
+
+--->1)Started the project with  FreeRTOS in cube mx .
+
+---->2)Babu Sir notes on RTOS.
+
+----->3)Documents to be read are given below
+
+------>1)Mastering_The_FreeRTOS_Real_Time_Kernel_A_Hands_on_Tutorial_Guide
+
+------>2)FreeRTOS_Reference_Manual_v9.0.0 and above recomended
+
+----->4)Started first with adc_timer trigger and successfully completed by creating a task and scheduling it.
+
+
+Date:30/9/2021 
+Time:11:00 pm
+
+--->1)Started with rtos in keil.
+
+  --->Problems faced
+
+    --->1)we need to install package for FreeRTOS v10.
+     
+
+--->2)Completed with adc_timer trigger and uart by creating producer-consumer task.
+
+  ---->1)Do not write systick interrupt handler function as we do in bare metal because it is written in port.c file of FreeRTOS.
+
+--->3)Effictively able to control periodicity of transimission of sensor data and understand the usage of queue.
+ 
+--->4)Problem faced while reception on ESP32
+
+   ---->1)We have take a buffer and store the character value one by one ,after completing all the transmission fron STM32F4xx buffer and storing the value in ESP32
+          then only publish the data otherwise it will print garbage value and irregulaties in displaying the sensor reading on screen.
+     
+   ---->2)store all the value in buffer in while(serial.available()) and when there is no transmission then publish it.
+
+   ---->3)As the producer task is periodic task with period of 10 sec and we publish message at the period of 1 sec  it will print empty value. 
+
+   ---->4)Take the delay value 10 or more then 10 so that it will publish after reception of data on ESP32
+
+
+ 
+
+
+
+
+
