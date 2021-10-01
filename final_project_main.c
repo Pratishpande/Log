@@ -47,10 +47,10 @@ int main(void)
 	HAL_TIM_Base_Start(&myTimHandle);
 	HAL_ADC_Start_IT(&myAdcHandle);	
 
-  ret = xTaskCreate( vProducer,"Task 1",240,NULL,1,NULL);
+        ret = xTaskCreate( vProducer,"Task 1",240,NULL,1,NULL);
 	configASSERT(ret);
    	
-  ret = xTaskCreate( vConsumer,"Task 2",240,NULL,1,NULL);
+        ret = xTaskCreate( vConsumer,"Task 2",240,NULL,1,NULL);
 	configASSERT(ret);
 	
 	vTaskStartScheduler();
@@ -68,8 +68,8 @@ int main(void)
 void GPIO_Config(void)
 {
 	
- __HAL_RCC_GPIOA_CLK_ENABLE();	
- __HAL_RCC_GPIOD_CLK_ENABLE();
+       __HAL_RCC_GPIOA_CLK_ENABLE();	
+        __HAL_RCC_GPIOD_CLK_ENABLE();
 	
 	GPIO_InitTypeDef myPinInit;
 	
@@ -79,7 +79,7 @@ void GPIO_Config(void)
 	HAL_GPIO_Init(GPIOA,&myPinInit);
 	
 	myPinInit.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
-  myPinInit.Mode = GPIO_MODE_OUTPUT_PP;
+        myPinInit.Mode = GPIO_MODE_OUTPUT_PP;
 	
 	HAL_GPIO_Init(GPIOD,&myPinInit);
 	
@@ -88,7 +88,7 @@ void GPIO_Config(void)
 	HAL_NVIC_SetPriority(SysTick_IRQn,0,0);
 	
 	
-  HAL_NVIC_SetPriority(ADC_IRQn,0,0);
+         HAL_NVIC_SetPriority(ADC_IRQn,0,0);
 	HAL_NVIC_EnableIRQ(ADC_IRQn);
 	
 	
@@ -128,7 +128,7 @@ void ADC_Config(void)
 void TIM_Config(void)
 {
 	
-   __HAL_RCC_TIM2_CLK_ENABLE();
+        __HAL_RCC_TIM2_CLK_ENABLE();
    	
 	myTimHandle.Instance = TIM2;
 	myTimHandle.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -138,7 +138,7 @@ void TIM_Config(void)
 	HAL_TIM_Base_Init(&myTimHandle);
 	
 	
-  TIM_ClockConfigTypeDef myClkSrcConfig;
+        TIM_ClockConfigTypeDef myClkSrcConfig;
 	myClkSrcConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
 	HAL_TIM_ConfigClockSource(&myTimHandle,&myClkSrcConfig);
 	
@@ -176,7 +176,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
   /* NOTE : This function Should not be modified, when the callback is needed,
             the HAL_ADC_ConvCpltCallback could be implemented in the user file
    */
- adcval = HAL_ADC_GetValue(&myAdcHandle);
+        adcval = HAL_ADC_GetValue(&myAdcHandle);
 	HAL_GPIO_TogglePin(GPIOD,GPIO_PIN_13);
 }
 
@@ -214,14 +214,14 @@ static void vProducer(void *pvParameters)
 	 
 	 xLastWakeTime = xTaskGetTickCount();
 	
-   while(1)	
+        while(1)	
 	{
 		adcvalue1 = adcval;
 
 		xQueueSend(xQueue,&adcvalue1,0);
 		HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,SET);			
-    vTaskDelay(1000);
- 	  HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,RESET);			
+                vTaskDelay(1000);
+ 	        HAL_GPIO_WritePin(GPIOD,GPIO_PIN_14,RESET);			
 		vTaskDelayUntil(&xLastWakeTime,10000);   
  				 
 	}
@@ -236,22 +236,22 @@ static void vConsumer(void *pvParameters)
    char tx_data[17] = "";
 	
        while(1)
-			 {
+       {
 				 
-				 xQueueReceive(xQueue,&adcvalue2,portMAX_DELAY);
-				 sprintf(tx_data,"%hu",adcvalue2);
-				 tx_data[13]='\0';
-				 tx_data[14]='\r';
+	 xQueueReceive(xQueue,&adcvalue2,portMAX_DELAY);
+	 sprintf(tx_data,"%hu",adcvalue2);
+	 tx_data[13]='\0';
+	 tx_data[14]='\r';
          tx_data[15]='\n';
          HAL_UART_Transmit(&myUartHandle,(uint8_t *)tx_data,sizeof(tx_data),10);
       	 HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15,SET);			
          vTaskDelay(1000);
- 	       HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15,RESET);			
-		     vTaskDelay(1000);   
+ 	 HAL_GPIO_WritePin(GPIOD,GPIO_PIN_15,RESET);			
+         vTaskDelay(1000);   
    		
          
  				 
 				 
-			 }
+      }
 }
 
